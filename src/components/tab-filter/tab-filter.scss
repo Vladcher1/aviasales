@@ -1,0 +1,45 @@
+.tab-filter-container {
+  background-color: #ffffff;
+  height: 49px;
+  width: 502px;
+  border: 1px solid #dfe5ec;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.tab-filter__button {
+  width: 168px;
+  height: 50px;
+  background-color: #ffffff;
+  border: 1px solid #dfe5ec;
+  padding: 15px;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+  background-color: transparent;
+  border: 1px transparent solid;
+  border-right: 1px solid #dfe5ec;
+  display: flex;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.tab-filter__button:first-of-type {
+  border-right: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-right: 1px solid #dfe5ec;
+}
+.tab-filter__button:last-of-type {
+  border-right: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.tab-filter__button:hover {
+  background-color: #2196f3;
+  color: #ffffff;
+  transition: 0.5s ease-in-out;
+}
