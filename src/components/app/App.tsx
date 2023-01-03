@@ -5,6 +5,7 @@ import CheapestTabList from "../cheapest-tab-list/cheapest-tab-list";
 import FastestTabList from "../fastest-tab-list/fastest-tab-list";
 import "../../img/Logo.svg";
 import "./App.scss";
+import { Provider } from "react-redux";
 
 function App() {
   return (

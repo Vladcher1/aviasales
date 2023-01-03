@@ -29,18 +29,28 @@
   transition: 0.5s ease-in-out;
 }
 
-input[type=checkbox] {
-  -webkit-appearance: auto;
-     -moz-appearance: auto;
-          appearance: auto;
-  border-radius: 3px;
+.checkbox {
+  position: absolute;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+.checkbox-name {
+  padding-left: 30px;
+}
+
+.custom-checkbox {
+  position: absolute;
+  box-sizing: border-box;
+  border-radius: 2px;
   width: 20px;
   height: 20px;
-  background-color: transparent;
+  background-color: none;
   border: 1px solid #9abbce;
 }
 
-input[type=checkbox]:checked {
-  border-color: #2196f3;
-  color: #2196f3;
+.checkbox:checked + .custom-checkbox {
+  background: url("../../img/Shape.svg") no-repeat center;
+  border: 1px solid #2196f3;
 }
