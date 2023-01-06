@@ -27,7 +27,7 @@
   display: flex;
   flex-direction: row;
   -moz-column-gap: 20px;
-       column-gap: 20px;
+  column-gap: 20px;
   margin-left: 103px;
   margin-right: 103px;
 }

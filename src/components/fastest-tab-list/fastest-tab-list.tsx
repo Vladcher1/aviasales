@@ -1,10 +1,7 @@
-import React from 'react'
-import FlightsList from '../flights-list/flights-list';
+import React from "react";
 
-const FastestTabList = () => {
-   return (
-   <FlightsList />
-)
-}
+import FlightsList from "../flights-list/flights-list";
+
+const FastestTabList = () => <FlightsList />;
 
 export default FastestTabList;

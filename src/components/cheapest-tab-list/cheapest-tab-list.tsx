@@ -1,8 +1,7 @@
 import React from "react";
+
 import FlightsList from "../flights-list/flights-list";
 
-const CheapestTabList = () => {
-  return <FlightsList />;
-};
+const CheapestTabList = () => <FlightsList />;
 
 export default CheapestTabList;

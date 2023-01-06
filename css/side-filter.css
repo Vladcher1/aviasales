@@ -32,8 +32,8 @@
 .checkbox {
   position: absolute;
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .checkbox-name {

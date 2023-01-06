@@ -1,68 +1,62 @@
 import React from "react";
 import "./side-filter.scss";
 
+import FilterItem from "../filter-item/filter-item";
+import {
+  ALL,
+  NO_CONNECTING_FLIGHTS,
+  ONE_CONNECTING_FLIGHTS,
+  TWO_CONNECTING_FLIGHTS,
+  THREE_CONNECTING_FLIGHTS,
+  ALL_TITLE,
+  NO_CONNECTING_FLIGHTS_TITLE,
+  ONE_CONNECTING_FLIGHTS_TITLE,
+  TWO_CONNECTING_FLIGHTS_TITLE,
+  THREE_CONNECTING_FLIGHTS_TITLE,
+} from "../../constants/filters";
+
+const makeId = () => {
+  let initialId = 0;
+  return () => initialId++;
+};
+
+const newId = makeId();
+
+const filtersArray = [
+  { payload: ALL, id: newId(), title: ALL_TITLE },
+  {
+    payload: NO_CONNECTING_FLIGHTS,
+    id: newId(),
+    title: NO_CONNECTING_FLIGHTS_TITLE,
+  },
+  {
+    payload: ONE_CONNECTING_FLIGHTS,
+    id: newId(),
+    title: ONE_CONNECTING_FLIGHTS_TITLE,
+  },
+  {
+    payload: TWO_CONNECTING_FLIGHTS,
+    id: newId(),
+    title: TWO_CONNECTING_FLIGHTS_TITLE,
+  },
+  {
+    payload: THREE_CONNECTING_FLIGHTS,
+    id: newId(),
+    title: THREE_CONNECTING_FLIGHTS_TITLE,
+  },
+] as const;
 
 const SideFilter: React.FC = () => {
+  const filterItems = filtersArray.map((obj) => {
+    const { payload, id, title } = obj;
+    return <FilterItem title={title} payload={payload} key={id} />;
+  });
+
   return (
     <div className="side-filter">
       <h5 className="side-filter__title">Количество пересадок</h5>
       <form className="side-filter__form">
-        <div className="side-filter__filter-item" onClick={() => {}}>
-          <label className="side-filter__label">
-            <input className="checkbox" type="checkbox"></input>
-            <span className="custom-checkbox "></span>
-            <span className="checkbox-name ">Все</span>
-          </label>
-        </div>
-
-        <div
-          className="side-filter__filter-item "
-          // onClick={() => {
-          //   dispatch(setFilterState("noConnectingFlights"));
-          // }}
-        >
-          <label>
-            <input className="checkbox" type="checkbox"></input>
-            <span className="custom-checkbox "></span>
-            <span className="checkbox-name ">Без пересадок</span>
-          </label>
-        </div>
-        <div
-          className="side-filter__filter-item"
-          // onClick={() => {
-          //   dispatch(setFilterState("oneConnectingFlight"));
-          // }}
-        >
-          <label>
-            <input className="checkbox" type="checkbox"></input>
-            <span className="custom-checkbox "></span>
-            <span className="checkbox-name ">1 пересадка</span>
-          </label>
-        </div>
-        <div
-          className="side-filter__filter-item"
-          // onClick={() => {
-          //   dispatch(setFilterState("twoConnectingFlights"));
-          // }}
-        >
-          <label>
-            <input className="checkbox" type="checkbox"></input>
-            <span className="custom-checkbox "></span>
-            <span className="checkbox-name ">2 пересадки</span>
-          </label>
-        </div>
-        <div
-          className="side-filter__filter-item "
-          // onClick={() => {
-          //   dispatch(setFilterState("threeConnectingFlights"));
-          // }}
-        >
-          <label>
-            <input className="checkbox" type="checkbox"></input>
-            <span className="custom-checkbox "></span>
-            <span className="checkbox-name ">3 пересадки</span>
-          </label>
-        </div>
+        <ul>{filterItems}</ul>
       </form>
     </div>
   );
