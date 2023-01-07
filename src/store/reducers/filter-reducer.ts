@@ -4,9 +4,8 @@ import {
   ONE_CONNECTING_FLIGHTS,
   TWO_CONNECTING_FLIGHTS,
   THREE_CONNECTING_FLIGHTS,
-} from "../constants/filters";
-
-import { SET_VISIBILITY_FILTER } from "./actionCreator";
+} from "../../constants/filters";
+import { SET_VISIBILITY_FILTER } from "../actionCreator";
 // если фильтра нет в массиве, тогда добавляем. если есть - убираем.
 const initialState: any = {
   [ALL]: true,
@@ -14,9 +13,11 @@ const initialState: any = {
   [ONE_CONNECTING_FLIGHTS]: true,
   [TWO_CONNECTING_FLIGHTS]: true,
   [THREE_CONNECTING_FLIGHTS]: true,
+  loading: false,
+  error: null,
 };
 
-export const reducer = (state = initialState, action: any) => {
+export const filterReducer = (state = initialState, action: any) => {
   const { type, payload } = action;
 
   if (type === SET_VISIBILITY_FILTER) {
