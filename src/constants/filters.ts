@@ -9,3 +9,5 @@ export const NO_CONNECTING_FLIGHTS_TITLE = "Без пересадок";
 export const ONE_CONNECTING_FLIGHTS_TITLE = "1 пересадка";
 export const TWO_CONNECTING_FLIGHTS_TITLE = "2 пересадки";
 export const THREE_CONNECTING_FLIGHTS_TITLE = "3 пересадки";
+
+export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER" as const;

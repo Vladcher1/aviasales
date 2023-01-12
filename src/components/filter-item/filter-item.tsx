@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { setVisibilityFilter } from "../../store/actionCreator";
+import { setVisibilityFilter } from "../../store/actions/actionCreator";
 
 const FilterItem = ({ title, payload }: any) => {
   const dispatch = useDispatch();
 
   const getCheckboxState = () => {
-    const checkboxState = useSelector((state) => state[payload]);
+    const checkboxState = useSelector((state: any) => state.filters[payload]);
+
     return checkboxState;
   };
   return (

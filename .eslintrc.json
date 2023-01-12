@@ -25,6 +25,16 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier", "import"],
   "rules": {
+    "operator-linebreak": [
+      "error",
+      "after",
+      {
+        "overrides": {
+          ":": "before"
+        }
+      }
+    ],
+    "default-param-last": 0,
     "guard-for-in": "off",
     "react/jsx-closing-bracket-location": "off",
     "import/newline-after-import": ["error", { "count": 1 }],

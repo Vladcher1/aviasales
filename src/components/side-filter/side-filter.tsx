@@ -2,6 +2,7 @@ import React from "react";
 import "./side-filter.scss";
 
 import FilterItem from "../filter-item/filter-item";
+import { makeId } from "../../utilities";
 import {
   ALL,
   NO_CONNECTING_FLIGHTS,
@@ -14,11 +15,6 @@ import {
   TWO_CONNECTING_FLIGHTS_TITLE,
   THREE_CONNECTING_FLIGHTS_TITLE,
 } from "../../constants/filters";
-
-const makeId = () => {
-  let initialId = 0;
-  return () => initialId++;
-};
 
 const newId = makeId();
 
@@ -47,6 +43,7 @@ const filtersArray = [
 ] as const;
 
 const SideFilter: React.FC = () => {
+  // console.log(filtersArray);
   const filterItems = filtersArray.map((obj) => {
     const { payload, id, title } = obj;
     return <FilterItem title={title} payload={payload} key={id} />;

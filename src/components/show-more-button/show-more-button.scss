@@ -1,0 +1,17 @@
+.show-more-button {
+  width: 502px;
+  height: 50px;
+  background-color: #2196f3;
+  color: #ffffff;
+  border: none;
+  font-family: inherit;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.show-more-button:hover {
+  opacity: 0.8;
+  transition: 0.5s ease-in;
+}
