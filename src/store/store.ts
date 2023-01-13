@@ -5,15 +5,20 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 
-// import { rootReduser } from "./reducers";
-import { filterReducer } from "./reducers/filter-reducer";
+import { reducer } from "./reducers/reducer";
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any;
+  }
+}
 
 const composeEnhancers =
-  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose;
 
 export const store = createStore(
-  filterReducer,
+  reducer,
   composeEnhancers(applyMiddleware(thunk))
 );

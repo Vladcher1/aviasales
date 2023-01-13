@@ -1,14 +1,7 @@
-import React from "react";
 import "./flight-item.scss";
-// import { useSelector } from "react-redux";
 import { format, add } from "date-fns";
 
 import "../../img/S7Logo.svg";
-
-// const getTicketsState = () => {
-//   const ticketsState = useSelector((state: any) => state);
-//   return ticketsState;
-// };
 
 const FlightItem = ({ price, carrier, segments }: any) => {
   const priceFmt = new Intl.NumberFormat("ru-RU").format(price);
@@ -29,7 +22,6 @@ const FlightItem = ({ price, carrier, segments }: any) => {
     new Date(0, 0, 0, 0, segments[1].duration, 0),
     "HHч mmм"
   );
-  // console.log(durationFirst, segments[0].duration);
 
   let connectingFlightsTextFirst;
   if (segments[0].stops.length === 0) {

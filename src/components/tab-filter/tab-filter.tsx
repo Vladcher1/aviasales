@@ -1,16 +1,15 @@
-import React from "react";
 import "./tab-filter.scss";
 import { useSelector, useDispatch } from "react-redux";
+
+import { SET_TAB_FILTER } from "../../store/actions/actions";
+import { tabClassNames } from "../../constants/constants";
 
 const TabFilter = () => {
   let buttonCheapest = "tab-filter__button cheapest";
   let buttonFastest = "tab-filter__button fastest";
   let buttonOptimal = "tab-filter__button optimal";
 
-  // const getTabState = () => {
   const tabState = useSelector((state: any) => state.currentTab);
-  //   return ticketsState;
-  // };
   const dispatch = useDispatch();
 
   if (tabState === "fastest") {
@@ -29,27 +28,24 @@ const TabFilter = () => {
         type="button"
         className={buttonCheapest}
         onClick={() => {
-          dispatch({ type: "SET_TAB_FILTER", payload: "cheapest" });
-        }}
-      >
+          dispatch({ type: SET_TAB_FILTER, payload: tabClassNames.CHEAPEST });
+        }}>
         Самый дешевый
       </button>
       <button
         type="button"
         className={buttonFastest}
         onClick={() => {
-          dispatch({ type: "SET_TAB_FILTER", payload: "fastest" });
-        }}
-      >
+          dispatch({ type: SET_TAB_FILTER, payload: tabClassNames.FASTEST });
+        }}>
         Самый быстрый
       </button>
       <button
         type="button"
         className={buttonOptimal}
         onClick={() => {
-          dispatch({ type: "SET_TAB_FILTER", payload: "optimal" });
-        }}
-      >
+          dispatch({ type: SET_TAB_FILTER, payload: tabClassNames.OPTIMAL });
+        }}>
         Оптимальный
       </button>
     </div>

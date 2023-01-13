@@ -1,48 +1,22 @@
+import { ALL } from "../../constants/constants";
 import {
-  ALL,
-  NO_CONNECTING_FLIGHTS,
-  ONE_CONNECTING_FLIGHTS,
-  TWO_CONNECTING_FLIGHTS,
-  THREE_CONNECTING_FLIGHTS,
   SET_VISIBILITY_FILTER,
-} from "../../constants/filters";
-import { State, FilterAction } from "../../types";
-import {
   FETCH_TICKETS,
   FETCH_TICKETS_ERROR,
   FETCH_TICKETS_SUCCESS,
-} from "../actions/action-creator-tickets";
+  SET_TAB_FILTER,
+  ADD_CURRENT_FLIGHTS,
+  SET_SEARCH_ID,
+} from "../actions/actions";
+import { State, FilterAction } from "../../types";
+import { initialState } from "../initial-state";
 
-export const initialState: State = {
-  filters: {
-    [ALL]: true,
-    [NO_CONNECTING_FLIGHTS]: true,
-    [ONE_CONNECTING_FLIGHTS]: true,
-    [TWO_CONNECTING_FLIGHTS]: true,
-    [THREE_CONNECTING_FLIGHTS]: true,
-  },
-  tickets: [],
-  loading: false,
-  error: null,
-  currentTab: "cheapest",
-  currentFlights: 5,
-  searchId: "",
-};
-
-export const filterReducer = (
-  state: State = initialState,
-  action: FilterAction
-) => {
-  const { type, payload } = action;
-  const {
-    filters,
-    currentTab,
-    currentFlights,
-  }: Pick<State, "filters" | "currentTab"> = state;
-
+export const reducer = (state: State = initialState, action: FilterAction) => {
+  const { type, payload }: FilterAction = action;
+  const { currentFlights }: Pick<State, "currentFlights"> = state;
+  const { filters }: any = state;
   if (type === SET_VISIBILITY_FILTER) {
-    // const result = { ...filters, [payload]: !filters[payload] };
-    let result = { ...filters };
+    let result: any = { ...filters };
     if (payload === ALL) {
       if (filters.ALL) {
         Object.keys(result).forEach((filter) => {
@@ -74,7 +48,6 @@ export const filterReducer = (
     return { ...state, loading: true, error: null, tickets: [] };
   }
   if (action.type === FETCH_TICKETS_SUCCESS) {
-    // console.log("reducer success", action.payload);
     return {
       ...state,
       loading: false,
@@ -85,17 +58,15 @@ export const filterReducer = (
   if (action.type === FETCH_TICKETS_ERROR) {
     return { ...state, loading: false, error: action.payload, tickets: [] };
   }
-  if (action.type === "SET_TAB_FILTER") {
+  if (action.type === SET_TAB_FILTER) {
     return { ...state, currentTab: action.payload };
   }
-  if (action.type === "ADD_CURRENT_FLIGHTS") {
+  if (action.type === ADD_CURRENT_FLIGHTS) {
     const newFlightsNumber = currentFlights + action.payload;
     return { ...state, currentFlights: newFlightsNumber };
   }
-  if (action.type === "SET_SEARCH_ID") {
+  if (action.type === SET_SEARCH_ID) {
     return { ...state, searchId: payload };
   }
   return state;
 };
-
-// { type: "SET_TAB_FILTER", payload: "cheapest" }

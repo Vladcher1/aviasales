@@ -25,6 +25,7 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier", "import"],
   "rules": {
+    "implicit-arrow-linebreak": "off",
     "operator-linebreak": [
       "error",
       "after",

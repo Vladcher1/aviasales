@@ -4,7 +4,7 @@ import {
   ONE_CONNECTING_FLIGHTS,
   TWO_CONNECTING_FLIGHTS,
   THREE_CONNECTING_FLIGHTS,
-} from "./constants/filters";
+} from "./constants/constants";
 
 export interface FiltersState {
   [ALL]: boolean;

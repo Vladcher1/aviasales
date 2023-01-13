@@ -1,10 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  FETCH_TICKETS,
-  fetchTickets,
-} from "../../store/actions/action-creator-tickets";
+import { FETCH_TICKETS } from "../../store/actions/actions";
 import FlightItem from "../flight-item/flight-item";
 import Spinner from "../spinner/spinner";
 import { makeId } from "../../utilities";
@@ -13,27 +10,19 @@ import { TicketState } from "../../types";
 import "./flights-list.scss";
 
 const FlightsList = () => {
-  const {
-    tickets,
-    loading,
-    error,
-    currentFlights,
-    currentTab,
-    filters,
-    searchId,
-  }: any = useSelector((state) => state);
+  const { tickets, loading, error, currentFlights, currentTab, filters }: any =
+    useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: FETCH_TICKETS });
-    dispatch(fetchTickets(searchId));
-  }, [dispatch]);
+  }, []);
 
   if (loading) {
     return <Spinner />;
   }
   if (error) {
-    return <div>Ошибка :(</div>;
+    return <div>Произошла ошибка, перезагрузите страницу</div>;
   }
 
   const newId = makeId();
@@ -93,8 +82,8 @@ const FlightsList = () => {
   const optimalSorted: TicketState[] = [...arrCoeffTickets].sort(
     (prev, curr) => curr.coeff - prev.coeff
   );
-  console.log(optimalSorted);
-  let cards;
+
+  let cards: any;
   if (currentTab === "cheapest") {
     cards = sortedCheapest
       .slice(0, currentFlights)
@@ -135,12 +124,11 @@ const FlightsList = () => {
   if (cards.length === 0) {
     return (
       <div className="no-tickets">
-        {/* <ul> */}
         <div>Рейсов, подходящих под заданные фильтры, не найдено</div>
-        {/* </ul> */}
       </div>
     );
   }
+
   return (
     <div>
       <ul>
