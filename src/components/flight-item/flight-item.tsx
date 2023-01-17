@@ -2,8 +2,13 @@ import "./flight-item.scss";
 import { format, add } from "date-fns";
 
 import "../../img/S7Logo.svg";
+import { TicketState } from "../../types";
 
-const FlightItem = ({ price, carrier, segments }: any) => {
+const FlightItem = ({
+  price,
+  carrier,
+  segments,
+}: Pick<TicketState, "price" | "carrier" | "segments">) => {
   const priceFmt = new Intl.NumberFormat("ru-RU").format(price);
 
   const startTimeFirst = format(new Date(segments[0].date), "HH:mm");

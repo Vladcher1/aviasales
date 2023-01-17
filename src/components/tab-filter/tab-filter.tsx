@@ -3,13 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { SET_TAB_FILTER } from "../../store/actions/actions";
 import { tabClassNames } from "../../constants/constants";
+import { State } from "../../types";
 
 const TabFilter = () => {
   let buttonCheapest = "tab-filter__button cheapest";
   let buttonFastest = "tab-filter__button fastest";
   let buttonOptimal = "tab-filter__button optimal";
 
-  const tabState = useSelector((state: any) => state.currentTab);
+  const tabState = useSelector(
+    (state: Pick<State, "currentTab">) => state.currentTab
+  );
   const dispatch = useDispatch();
 
   if (tabState === "fastest") {
