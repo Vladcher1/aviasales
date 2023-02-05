@@ -21,4 +21,5 @@ export const initialState: State = {
   currentTab: "cheapest",
   currentFlights: 5,
   searchId: "",
+  isFetching: true,
 };

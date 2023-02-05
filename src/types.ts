@@ -43,6 +43,7 @@ export interface State {
   currentTab: string;
   currentFlights: number;
   searchId: string;
+  isFetching: boolean;
 }
 export interface FilterAction {
   type: string;

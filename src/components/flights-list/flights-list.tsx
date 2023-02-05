@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { FETCH_TICKETS } from "../../store/actions/actions";
 import FlightItem from "../flight-item/flight-item";
-import Spinner from "../spinner/spinner";
 import { makeId } from "../../utilities";
 import { ShowMoreButton } from "../show-more-button/show-more.button";
 import { TicketState } from "../../types";
+
 import "./flights-list.scss";
 
 const FlightsList = () => {
-  const { tickets, loading, error, currentFlights, currentTab, filters }: any =
+  const { tickets, error, currentFlights, currentTab, filters }: any =
     useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -18,9 +18,6 @@ const FlightsList = () => {
     dispatch({ type: FETCH_TICKETS });
   }, []);
 
-  if (loading) {
-    return <Spinner />;
-  }
   if (error) {
     return <div>Произошла ошибка, перезагрузите страницу</div>;
   }
@@ -131,9 +128,7 @@ const FlightsList = () => {
 
   return (
     <div>
-      <ul>
-        <div>{cards}</div>
-      </ul>
+      <ul>{cards}</ul>
       <ShowMoreButton />
     </div>
   );

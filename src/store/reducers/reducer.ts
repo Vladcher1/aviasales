@@ -52,7 +52,8 @@ export const reducer = (state: State = initialState, action: FilterAction) => {
       ...state,
       loading: false,
       error: null,
-      tickets: [...state.tickets, ...action.payload],
+      tickets: [...state.tickets, ...action.payload.tickets],
+      isFetching: action.payload.isFetching,
     };
   }
   if (action.type === FETCH_TICKETS_ERROR) {
@@ -67,6 +68,9 @@ export const reducer = (state: State = initialState, action: FilterAction) => {
   }
   if (action.type === SET_SEARCH_ID) {
     return { ...state, searchId: payload };
+  }
+  if (action.type === "IS_FETCHING") {
+    return { ...state, isFetching: action.payload };
   }
   return state;
 };

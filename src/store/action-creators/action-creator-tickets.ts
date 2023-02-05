@@ -1,7 +1,11 @@
 import axios from "axios";
 
 import { store } from "../store";
-import { FETCH_TICKETS_ERROR, FETCH_TICKETS_SUCCESS } from "../actions/actions";
+import {
+  FETCH_TICKETS_ERROR,
+  FETCH_TICKETS_SUCCESS,
+  IS_FETCHING,
+} from "../actions/actions";
 import { State } from "../../types";
 
 export const requestRetry: any = async (url: string, n: number) => {
@@ -21,7 +25,13 @@ export const fetchTickets =
         `https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`
       );
       const { tickets, stop } = data;
-      dispatch({ type: FETCH_TICKETS_SUCCESS, payload: tickets });
+      dispatch({
+        type: FETCH_TICKETS_SUCCESS,
+        payload: { tickets, isFetching: true },
+      });
+      if (stop === true) {
+        dispatch({ type: IS_FETCHING, payload: false });
+      }
       if (stop === false) {
         dispatch(fetchTickets(searchId));
       }

@@ -7,3 +7,4 @@ export const FETCH_TICKETS_ERROR = "FETCH_TICKETS_ERROR" as const;
 export const SET_TAB_FILTER = "SET_TAB_FILTER" as const;
 export const ADD_CURRENT_FLIGHTS = "ADD_CURRENT_FLIGHTS" as const;
 export const SET_SEARCH_ID = "SET_SEARCH_ID" as const;
+export const IS_FETCHING = "IS_FETCHING" as const;

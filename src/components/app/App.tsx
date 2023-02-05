@@ -8,12 +8,13 @@ import "./App.scss";
 import { store } from "../../store/store";
 import FlightsList from "../flights-list/flights-list";
 import { fetchTickets } from "../../store/action-creators/action-creator-tickets";
+import Spinner from "../spinner/spinner";
 import { State } from "../../types";
 
 function App() {
   const dispatch: any = useDispatch();
   const search: any = useSelector((state: State) => state.searchId);
-
+  const isFetching: any = useSelector((state: State) => state.isFetching);
   useEffect(() => {
     dispatch(fetchTickets(search));
   }, [search]);
@@ -37,6 +38,12 @@ function App() {
             </section>
             <section className="page-main__flights-list">
               <TabFilter />
+
+              {isFetching && (
+                <div className="spinner-container">
+                  <Spinner />
+                </div>
+              )}
               <FlightsList />
             </section>
           </main>
