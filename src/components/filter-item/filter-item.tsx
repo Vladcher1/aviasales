@@ -1,14 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { setVisibilityFilter } from "../../store/action-creators/action-creator-filters";
+import { FilterItemProps } from "../../types";
 
-const FilterItem = ({ title, payload }: any) => {
+const FilterItem = ({ title, payload }: FilterItemProps) => {
   const dispatch = useDispatch();
 
-  const getCheckboxState = () => {
-    const checkboxState = useSelector((state: any) => state.filters[payload]);
-    return checkboxState;
-  };
+  const checkboxState = useSelector((state: any) => state.filters[payload]);
 
   return (
     <li className="side-filter__filter-item">
@@ -19,7 +17,7 @@ const FilterItem = ({ title, payload }: any) => {
           onChange={() => {
             dispatch(setVisibilityFilter(payload));
           }}
-          checked={getCheckboxState()}
+          checked={checkboxState}
         />
         <span className="custom-checkbox " />
         <span className="checkbox-name ">{title}</span>

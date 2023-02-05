@@ -49,3 +49,7 @@ export interface FilterAction {
   type: string;
   payload?: any;
 }
+export type FilterItemProps = {
+  title: string;
+  payload: string;
+};
