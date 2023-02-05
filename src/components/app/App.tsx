@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
+import { Alert } from "antd";
 
 import SideFilter from "../side-filter/side-filter";
 import TabFilter from "../tab-filter/tab-filter";
@@ -15,13 +16,30 @@ function App() {
   const dispatch: any = useDispatch();
   const search: any = useSelector((state: State) => state.searchId);
   const isFetching: any = useSelector((state: State) => state.isFetching);
+  const [network, setNetwork] = useState(true);
   useEffect(() => {
     dispatch(fetchTickets(search));
   }, [search]);
 
+  useEffect(() => {
+    window.onoffline = () => {
+      setNetwork(false);
+    };
+    window.ononline = () => {
+      setNetwork(true);
+    };
+  });
+
   return (
     <Provider store={store}>
       <div className="app">
+        {!network && (
+          <Alert
+            message="Bad Internet Connection"
+            description="Please, check your internet connection and reload this page"
+            type="error"
+          />
+        )}
         <div className="app-container">
           <header className="page-header">
             <a href="/#">
@@ -32,6 +50,7 @@ function App() {
               />
             </a>
           </header>
+
           <main className="page-main">
             <section className="page-main__side-filter-container">
               <SideFilter />

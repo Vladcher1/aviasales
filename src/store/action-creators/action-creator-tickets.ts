@@ -1,22 +1,11 @@
 import axios from "axios";
 
-import { store } from "../store";
 import {
-  FETCH_TICKETS_ERROR,
   FETCH_TICKETS_SUCCESS,
   IS_FETCHING,
 } from "../actions/actions";
 import { State } from "../../types";
-
-export const requestRetry: any = async (url: string, n: number) => {
-  try {
-    return await fetch(url);
-  } catch (e) {
-    if (n <= 1) store.dispatch({ type: FETCH_TICKETS_ERROR, payload: e });
-    const retry = await requestRetry(url, n - 1);
-    return retry;
-  }
-};
+import { requestRetry } from "../../utilities";
 
 export const fetchTickets =
   (searchId: Pick<State, "searchId">) => async (dispatch: any) => {
