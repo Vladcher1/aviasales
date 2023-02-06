@@ -8,7 +8,7 @@ import {
   ADD_CURRENT_FLIGHTS,
   SET_SEARCH_ID,
 } from "../actions/actions";
-import { State, FilterAction } from "../../types";
+import { State, FilterAction, TicketState } from "../../types";
 import { initialState } from "../initial-state";
 
 export const reducer = (state: State = initialState, action: FilterAction) => {
@@ -48,13 +48,54 @@ export const reducer = (state: State = initialState, action: FilterAction) => {
     return { ...state, loading: true, error: null, tickets: [] };
   }
   if (action.type === FETCH_TICKETS_SUCCESS) {
-    return {
-      ...state,
-      loading: false,
-      error: null,
-      tickets: [...state.tickets, ...action.payload.tickets],
-      isFetching: action.payload.isFetching,
-    };
+    if (state.currentTab === "cheapest") {
+      const res = [...state.tickets, ...action.payload.tickets].sort(
+        (prev, curr) => prev.price - curr.price
+      );
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        tickets: res,
+        isFetching: action.payload.isFetching,
+      };
+    }
+    if (state.currentTab === "fastest") {
+      const res = [...state.tickets, ...action.payload.tickets].sort(
+        (prev, curr) =>
+          prev.segments[0].duration +
+          prev.segments[1].duration -
+          (curr.segments[0].duration + curr.segments[1].duration)
+      );
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        tickets: res,
+        isFetching: action.payload.isFetching,
+      };
+    }
+    if (state.currentTab === "optimal") {
+      const arrCoeffTickets = [...state.tickets, ...action.payload.tickets].map(
+        (ticket: TicketState) => {
+          const coeffPrice = (ticket.price * 1) / -10000;
+
+          const coeffDuration =
+            ((ticket.segments[0].duration + ticket.segments[1].duration) * 1) /
+            -10000;
+          const coeff = coeffPrice + coeffDuration;
+          return { ...ticket, coeff };
+        }
+      );
+      const res = arrCoeffTickets.sort((prev, curr) => curr.coeff - prev.coeff);
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        tickets: res,
+        isFetching: action.payload.isFetching,
+      };
+    }
   }
   if (action.type === FETCH_TICKETS_ERROR) {
     return { ...state, loading: false, error: action.payload, tickets: [] };

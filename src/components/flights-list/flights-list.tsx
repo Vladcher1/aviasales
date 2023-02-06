@@ -10,7 +10,7 @@ import { TicketState } from "../../types";
 import "./flights-list.scss";
 
 const FlightsList = () => {
-  const { tickets, error, currentFlights, currentTab, filters }: any =
+  const { tickets, error, currentFlights, filters }: any =
     useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -23,7 +23,6 @@ const FlightsList = () => {
   }
 
   const newId = makeId();
-
   let sideFiltration: TicketState[] = [...tickets];
 
   if (!filters.NO_CONNECTING_FLIGHTS) {
@@ -55,68 +54,16 @@ const FlightsList = () => {
     );
   }
 
-  const sortedCheapest: TicketState[] = [...sideFiltration].sort(
-    (prev, curr) => prev.price - curr.price
-  );
-
-  const sortedFastest: TicketState[] = [...sideFiltration].sort(
-    (prev, curr) =>
-      prev.segments[0].duration +
-      prev.segments[1].duration -
-      (curr.segments[0].duration + curr.segments[1].duration)
-  );
-
-  const arrCoeffTickets = sideFiltration.map((ticket: TicketState) => {
-    const coeffPrice = (ticket.price * 1) / -10000;
-
-    const coeffDuration =
-      ((ticket.segments[0].duration + ticket.segments[1].duration) * 1) /
-      -10000;
-    const coeff = coeffPrice + coeffDuration;
-    return { ...ticket, coeff };
-  });
-
-  const optimalSorted: TicketState[] = [...arrCoeffTickets].sort(
-    (prev, curr) => curr.coeff - prev.coeff
-  );
-
-  let cards: any;
-  if (currentTab === "cheapest") {
-    cards = sortedCheapest
-      .slice(0, currentFlights)
-      .map((ticket: TicketState) => (
-        <FlightItem
-          key={newId()}
-          price={ticket.price}
-          carrier={ticket.carrier}
-          segments={ticket.segments}
-        />
-      ));
-  }
-  if (currentTab === "fastest") {
-    cards = sortedFastest
-      .slice(0, currentFlights)
-      .map((ticket: TicketState) => (
-        <FlightItem
-          key={newId()}
-          price={ticket.price}
-          carrier={ticket.carrier}
-          segments={ticket.segments}
-        />
-      ));
-  }
-  if (currentTab === "optimal") {
-    cards = optimalSorted
-      .slice(0, currentFlights)
-      .map((ticket: TicketState) => (
-        <FlightItem
-          key={newId()}
-          price={ticket.price}
-          carrier={ticket.carrier}
-          segments={ticket.segments}
-        />
-      ));
-  }
+  const cards: any = sideFiltration
+    .slice(0, currentFlights)
+    .map((ticket: TicketState) => (
+      <FlightItem
+        key={newId()}
+        price={ticket.price}
+        carrier={ticket.carrier}
+        segments={ticket.segments}
+      />
+    ));
 
   if (cards.length === 0) {
     return (

@@ -1,9 +1,6 @@
 import axios from "axios";
 
-import {
-  FETCH_TICKETS_SUCCESS,
-  IS_FETCHING,
-} from "../actions/actions";
+import { FETCH_TICKETS_SUCCESS, IS_FETCHING } from "../actions/actions";
 import { State } from "../../types";
 import { requestRetry } from "../../utilities";
 

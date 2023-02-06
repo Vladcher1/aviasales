@@ -16,10 +16,11 @@ function App() {
   const dispatch: any = useDispatch();
   const search: any = useSelector((state: State) => state.searchId);
   const isFetching: any = useSelector((state: State) => state.isFetching);
+  const currentTab = useSelector((state: State) => state.currentTab);
   const [network, setNetwork] = useState(true);
   useEffect(() => {
     dispatch(fetchTickets(search));
-  }, [search]);
+  }, [search, currentTab]);
 
   useEffect(() => {
     window.onoffline = () => {
